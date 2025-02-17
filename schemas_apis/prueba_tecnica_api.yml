@@ -1,0 +1,92 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Prueba tecnica
+  description: API for prueba tecnica
+
+servers:
+- url: http://localhost:8080/pruebaTecnica/api
+
+paths:
+  /findPrice:
+    get:
+      operationId: findPrice
+      description: Find price
+      tags:
+      - Pricing
+      parameters:
+      - in: query
+        name: dateQuery
+        schema:
+          type: string
+        required: true
+        description: Start date
+      - in: query
+        name: productId
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: Product id
+      - in: query
+        name: brandId
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: Brand id
+      responses:
+        '200':
+          description: Price found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricesResult'
+        '400':
+          description: Invalid request
+          $ref: './common.yml#/components/responses/400Error'
+        '401':
+          description: Unauthorized
+          $ref: './common.yml#/components/responses/401Error'
+        '403':
+          description: Forbidden
+          $ref: './common.yml#/components/responses/403Error'
+        '404':
+          description: Not Found
+          $ref: './common.yml#/components/responses/404Error'
+
+components:
+  schemas:
+    PricesResult:
+      type: object
+      required:
+      - productId
+      - brandId
+      - priceList
+      - startDate
+      - endDate
+      - price
+      properties:
+        productId:
+          type: integer
+          format: int64
+          description: Product id
+        brandId:
+          type: integer
+          format: int64
+          description: Brand id
+        priceList:
+          type: integer
+          format: int64
+          description: Price list
+        startDate:
+          type: string
+          format: date-time
+          description: Start date
+        endDate:
+          type: string
+          format: date-time
+          description: End date
+        price:
+          type: number
+          description: Price

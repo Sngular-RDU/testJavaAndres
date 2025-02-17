@@ -1,0 +1,49 @@
+components:
+
+  # Errors
+  responses:
+    400Error:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+      description: "Bad Request"
+    403Error:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+      description: "Forbidden"
+    404Error:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+      description: "Not Found"
+    401Error:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+      description: "Unauthorized Access"
+    409Error:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+      description: "Conflict"

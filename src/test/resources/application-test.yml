@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: @testDataSource.url@
+    username: @dataSource.user@
+    password: @dataSource.password@
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql

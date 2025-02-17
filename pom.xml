@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>pruebaTecnica</artifactId>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>scs-multiapi-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <specFiles>
+                <specFile>
+                  <apiPackage>com.sngular.apigenerator.openapi.api</apiPackage>
+                  <filePath>${project.basedir}/schemas_apis/prueba_tecnica_api.yml</filePath>
+                  <modelNameSuffix>DTO</modelNameSuffix>
+                  <modelPackage>com.sngular.apigenerator.openapi.api.model</modelPackage>
+                  <useLombokModelAnnotation>true</useLombokModelAnnotation>
+                </specFile>
+              </specFiles>
+            </configuration>
+            <goals>
+              <goal>openapi-generation</goal>
+            </goals>
+            <id>openapi</id>
+            <phase>generate-sources</phase>
+          </execution>
+        </executions>
+        <groupId>com.sngular</groupId>
+        <version>6.0.4</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <artifactId>lombok</artifactId>
+              <groupId>org.projectlombok</groupId>
+              <version>${lombok.version}</version>
+            </path>
+            <path>
+              <artifactId>mapstruct-processor</artifactId>
+              <groupId>org.mapstruct</groupId>
+              <version>1.5.5.Final</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+      </plugin>
+      <plugin>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <artifactId>lombok</artifactId>
+              <groupId>org.projectlombok</groupId>
+            </exclude>
+          </excludes>
+        </configuration>
+        <groupId>org.springframework.boot</groupId>
+      </plugin>
+
+    </plugins>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering> <!-- Habilita filtrado en test -->
+      </testResource>
+    </testResources>
+  </build>
+  <dependencies>
+    <dependency>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-session-core</artifactId>
+      <groupId>org.springframework.session</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-security</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>h2</artifactId>
+      <groupId>com.h2database</groupId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>mapstruct</artifactId>
+      <groupId>org.mapstruct</groupId>
+      <version>1.5.5.Final</version>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-security-test</artifactId>
+      <groupId>org.springframework.security</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-devtools</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <optional>true</optional>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>jjwt-api</artifactId>
+      <groupId>io.jsonwebtoken</groupId>
+      <version>0.11.5</version>
+    </dependency>
+    <dependency>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <groupId>jakarta.persistence</groupId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>validation-api</artifactId>
+      <groupId>javax.validation</groupId>
+      <version>2.0.1.Final</version>
+    </dependency>
+    <dependency>
+      <artifactId>swagger-annotations</artifactId>
+      <groupId>io.swagger.core.v3</groupId>
+      <version>2.2.20</version>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <version>2.12.5</version>
+    </dependency>
+
+  </dependencies>
+  <description>Demo project for Spring Boot</description>
+  <developers>
+    <developer />
+  </developers>
+  <groupId>com.example.prueba.tecnica</groupId>
+  <licenses>
+    <license />
+  </licenses>
+  <modelVersion>4.0.0</modelVersion>
+  <name>pruebaTecnica</name>
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <relativePath />
+    <version>3.4.2</version> <!-- lookup parent from repository -->
+  </parent>
+  <profiles>
+    <profile>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <artifactId>h2</artifactId>
+          <groupId>com.h2database</groupId>
+        </dependency>
+      </dependencies>
+      <id>h2</id>
+      <properties>
+        <dataSource.password></dataSource.password>
+        <dataSource.url>jdbc:h2:mem:pruebaTecnica</dataSource.url>
+        <dataSource.user>user</dataSource.user>
+        <testDataSource.url>jdbc:h2:mem:pruebaTecnicaTest</testDataSource.url>
+      </properties>
+    </profile>
+  </profiles>
+  <properties>
+    <java.version>17</java.version>
+  </properties>
+  <scm>
+    <connection />
+    <developerConnection />
+    <tag />
+    <url />
+  </scm>
+  <url />
+
+  <version>0.0.1-SNAPSHOT</version>
+
+</project>
